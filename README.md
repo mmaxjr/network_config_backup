@@ -14,7 +14,17 @@ Script em Bash que conecta via SSH em uma lista de switches/roteadores, extrai a
 
 - Bash, OpenSSH client
 - Acesso SSH configurado (chave ou usuário/senha) nos dispositivos
+- Opcional: `sshpass` instalado, apenas se for usar autenticação por senha
 - Comando de exibição de configuração compatível com o fabricante (Cisco, Huawei, MikroTik, etc.)
+
+## Autenticação
+
+O script suporta dois modos, por dispositivo:
+
+- **Chave SSH (recomendado)** — deixe a 4ª coluna do `devices.txt` em branco. O script conecta usando a chave SSH do usuário, sem nenhuma senha armazenada.
+- **Usuário/senha** — preencha a 4ª coluna com a senha. O script usa o utilitário `sshpass` para autenticar automaticamente. Use apenas quando o dispositivo não suportar chave (comum em switches mais simples).
+
+⚠️ Se usar senha no arquivo, proteja-o com `chmod 600 devices.txt` — o script avisa no log se a permissão estiver diferente disso. Sempre que possível, prefira chave SSH.
 
 ## Configuração
 
@@ -23,6 +33,7 @@ Crie o arquivo `devices.txt` no mesmo formato:
 ```
 192.168.1.1;admin;show running-config
 switch-core.empresa.com;netadmin;display current-configuration
+192.168.1.2;admin;show running-config;MinhaSenh@123
 ```
 
 Ajuste `BACKUP_DIR`, `SSH_TIMEOUT` e `DIAS_RETENCAO` no início do script conforme necessário.
