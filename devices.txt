@@ -1,0 +1,8 @@
+# Formato: host;usuario;comando;senha(opcional)
+# Deixe a senha em branco para usar autenticação por chave SSH (recomendado).
+# Copie este arquivo para devices.txt e preencha com seus dados reais.
+# NUNCA suba o devices.txt real para o Git.
+
+192.168.1.1;admin;show running-config
+switch-core.empresa.com;netadmin;display current-configuration
+192.168.1.2;admin;show running-config;MinhaSenh@123
